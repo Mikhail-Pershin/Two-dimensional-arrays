@@ -48,43 +48,92 @@
 // }
 
 
-// Задача 50. Напишите программу, которая на вход принимает два числа(строка, столбец), 
-// проверяя есть ли такая позиция в двумерном массиве и возвращает сообщение о том, 
-// что оно найдено, а также какое число стоит на этом месте или же указание, что такого элемента нет.
+// // Задача 50. Напишите программу, которая на вход принимает два числа(строка, столбец), 
+// // проверяя есть ли такая позиция в двумерном массиве и возвращает сообщение о том, 
+// // что оно найдено, а также какое число стоит на этом месте или же указание, что такого элемента нет.
+
+// // Например, задан массив:
+
+// // 1 4 7 2
+
+// // 5 9 2 3
+
+// // 8 4 2 4
+
+// // i = 1, j = 3 -> Такой элемент есть: 3
+// // i = 4, j = 2 -> такого элемента в массиве нет
+
+
+// Console.Write("Введите первое число(строка): ");
+// int rowsNumber = int.Parse(Console.ReadLine()!);
+
+// Console.Write("Введите второе число(столбец): ");
+// int columnsNumber = int.Parse(Console.ReadLine()!);
+
+// int[,] array = GetArray(3, 4, 0, 10);
+// Console.WriteLine($"Наш массив:");
+// PrintArray(array);
+// // Console.WriteLine();
+
+// if (rowsNumber > array.GetLength(0) || columnsNumber > array.GetLength(1))
+// {
+//   Console.WriteLine("Такого элемента в массиве нет");
+// }
+// else
+// {
+//   Console.WriteLine($"строка {rowsNumber}, столбец {columnsNumber} -> такой элемент есть: {array[rowsNumber - 1, columnsNumber - 1]}");
+// }
+
+// // ----------------Заполнение массива-----------------
+// int[,] GetArray(int m, int n, int minValue, int maxValue)
+// {
+//   int[,] res = new int[m, n];
+
+//   for (int i = 0; i < m; i++)
+//   {
+//     for (int j = 0; j < n; j++)
+//     {
+//       res[i, j] = new Random().Next(minValue, maxValue + 1);
+//     }
+//   }
+//   return res;
+// }
+
+// // -----------------Вывод массива-----------------
+// void PrintArray(int[,] array)
+// {
+//   for (int i = 0; i < array.GetLength(0); i++)
+//   {
+//     for (int j = 0; j < array.GetLength(1); j++)
+//     {
+//       Console.Write($"{array[i, j]} ");
+//     }
+//     Console.WriteLine();
+//   }
+// }
+
+
+
+// Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
 
 // Например, задан массив:
-
 // 1 4 7 2
-
 // 5 9 2 3
-
 // 8 4 2 4
+// Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 
-// i = 1, j = 3 -> Такой элемент есть: 3
-// i = 4, j = 2 -> такого элемента в массиве нет
+Console.Write("Введите количество строк в массиве: ");
+int rows = int.Parse(Console.ReadLine()!);
 
+Console.Write("Введите количество столбцов в массиве: ");
+int columns = int.Parse(Console.ReadLine()!);
 
-Console.Write("Введите первое число(строка): ");
-int rowsNumber = int.Parse(Console.ReadLine()!);
-
-Console.Write("Введите второе число(столбец): ");
-int columnsNumber = int.Parse(Console.ReadLine()!);
-
-int[,] array = GetArray(3, 4, 0, 10);
-Console.WriteLine($"Наш массив:");
+int[,] array = GetArray(rows, columns, 0, 10);
+Console.WriteLine($"Наш массив: ");
 PrintArray(array);
 // Console.WriteLine();
 
-if (rowsNumber > array.GetLength(0) || columnsNumber > array.GetLength(1))
-{
-  Console.WriteLine("Такого элемента в массиве нет");
-}
-else
-{
-  Console.WriteLine($"строка {rowsNumber}, столбец {columnsNumber} -> такой элемент есть: {array[rowsNumber - 1, columnsNumber - 1]}");
-}
-
-// ----------------Заполнение массива-----------------
+// ----------------Заполнение массива--------------------
 int[,] GetArray(int m, int n, int minValue, int maxValue)
 {
   int[,] res = new int[m, n];
@@ -106,8 +155,22 @@ void PrintArray(int[,] array)
   {
     for (int j = 0; j < array.GetLength(1); j++)
     {
-      Console.Write($"{array[i, j]} ");
+      Console.Write($"{array[i, j]}  ");
     }
     Console.WriteLine();
   }
+}
+
+
+Console.Write("Среднее арифметическое каждого столбца: ");
+for (int j = 0; j < array.GetLength(1); j++)
+{
+  double sum = 0;
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    sum = (sum + array[i, j]);
+  }
+  sum = Math.Round(sum / rows, 2, MidpointRounding.ToEven);
+
+  Console.Write(sum + "; ");
 }
